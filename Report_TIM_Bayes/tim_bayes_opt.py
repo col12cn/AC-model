@@ -42,7 +42,7 @@ all_results = {}
 # Loop over each trace file
 # -------------------------
 for trace_file in trace_files:
-    print(f"\nProcessing trace file: {trace_file} with delta={delta}")
+    print(f"\nProcessing trace file: {trace_file} ")
     # Load posterior samples via ArviZ
     idata = az.from_netcdf(trace_file)
     # Flatten posterior draws for joint sampling
@@ -92,17 +92,22 @@ for trace_file in trace_files:
             ρ = rho_samples[p]
 
             perm = 0.5 * γ * X**2 - 0.5 * γ * gp.quicksum(n[k]*n[k] for k in range(N+1))
+
             spread = s * X
+
             temp = (eta / tau) * gp.quicksum(n[k]*n[k] for k in range(N+1))
-            sto = sigma * math.sqrt(tau) * gp.quicksum(
-                (X - gp.quicksum(n[i] for i in range(k+1))) * xi[p, k]
-                for k in range(N+1)
-            )
-            decay = gp.QuadExpr()
+
+            sto = 0.0
             for k in range(N+1):
-                for i in range(k):
-                    weight = κ * math.exp(-ρ * tau * (k - i))
-                    decay.add(weight, n[k], n[i])
+                inv_expr_k = X - gp.quicksum(n[i] for i in range(k+1))
+                sto += inv_expr_k * xi[p, k]
+            sto = sigma * math.sqrt(tau) * sto
+
+            #Transient Impact
+            decay = κ * gp.quicksum(n[k] * (gp.quicksum(
+                n[i] * math.exp(-ρ * tau * (k - i)) for i in range(k)))
+                for k in range(N+1))
+
 
             IS_p = perm + spread + temp - sto + decay
             IS_exprs.append(IS_p)

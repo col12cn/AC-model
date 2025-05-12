@@ -112,7 +112,6 @@ for delta in delta_list:
                 n_vars[i] * math.exp(-rho * tau * (k - i)) for i in range(k)))
                 for k in range(N+1))
 
-
             # Total IS for scenario p
             IS_p = perm_term + spread_term + temp_term - stochastic_term + decay_term
             IS_expr.append(IS_p)
