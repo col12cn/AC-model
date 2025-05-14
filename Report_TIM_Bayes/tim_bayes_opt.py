@@ -17,25 +17,23 @@ import datetime
 # -------------------------
 # List of NetCDF trace files
 # -------------------------
-trace_files = ["/nfs/home/colinn/Report_AC/Report_TIM_Bayes/20250514_000825/trace_50_gap_1_seed_3.nc", 
-               "/nfs/home/colinn/Report_AC/Report_TIM_Bayes/20250514_000825/trace_250_gap_1_seed_3.nc",
-               "/nfs/home/colinn/Report_AC/Report_TIM_Bayes/20250514_000825/trace_2000_gap_1_seed_3.nc"]
+trace_files = ["/nfs/home/colinn/Report_AC/Report_TIM_Bayes/20250514_000825/trace_50_gap_1_seed_3.nc", "/nfs/home/colinn/Report_AC/Report_TIM_Bayes/20250514_000825/trace_250_gap_1_seed_3.nc", "/nfs/home/colinn/Report_AC/Report_TIM_Bayes/20250514_000825/trace_2000_gap_1_seed_3.nc"]
 
 # -------------------------
 # Parameter Setup
 # -------------------------
 N = 10               # Number of time intervals
-m = 2000             # Number of scenarios
-X = 1e5              # Total shares to sell
+m = 1500             # Number of scenarios
+X = 1e3              # Total shares to sell
 T = 1                # Trading horizon
 tau = T / N         # Interval length
 s = 0                # Spread cost per share
-eta = 1e-05 * tau    # Temporary impact coefficient
+eta = 1e-03 * tau    # Temporary impact coefficient
 sigma = 0.45         # Volatility
 
 delta = 0.1          # Fixed chance constraint threshold
-M = 5e5              # Big-M constant
-C_max = 100100         # IS threshold
+M = 5e3              # Big-M constant
+C_max = 1001         # IS threshold
 num_runs = 10        # Number of Monte Carlo runs per trace file
 
 all_results = {}
@@ -69,19 +67,23 @@ for trace_file in trace_files:
         xi = np.random.normal(0, 1, (m, N+1))
         # Sample joint indices into posterior draws
         idx = np.random.randint(0, n_samples, size=m)
-        kappa_samples = kappa_vals[idx]
-        gamma_samples = gamma_vals[idx]
+        kappa_samples = kappa_vals[idx]*100
+        gamma_samples = gamma_vals[idx]*100
         rho_samples   = beta_vals[idx]
+
+        print(f"Mean of Kappa: {np.mean(kappa_samples)}")
+        print(f"Mean of Gamma: {np.mean(gamma_samples)}")
+        print(f"Mean of rho: {np.mean(rho_samples)}")
 
         model = gp.Model("TIM_MCMC_Opt")
         model.Params.OutputFlag = 1
         model.Params.NonConvex = 2
-        model.Params.MIPFocus = 2
-        model.Params.Cuts = 2
+        model.Params.Cuts = 3
         model.Params.Presolve = 2
+        model.Params.MIPFocus = 2
         model.Params.OBBT = 2
-        model.Params.Threads = 90
-        model.Params.MIPGap = 2e-3
+        model.Params.Threads = 80
+        model.Params.MIPGap = 0.002
 
         # Decision variables
         n = model.addVars(N+1, lb=0, name="n")
@@ -94,7 +96,7 @@ for trace_file in trace_files:
             κ = kappa_samples[p]
             γ = gamma_samples[p]
             ρ = rho_samples[p]
-
+            #ρ = 2.231
             perm = 0.5 * γ * X**2 - 0.5 * γ * gp.quicksum(n[k]*n[k] for k in range(N+1))
 
             spread = s * X
@@ -120,13 +122,6 @@ for trace_file in trace_files:
         model.addConstr(gp.quicksum(b[p] for p in range(m)) <= delta * m, "Chance")
         model.setObjective((1.0/m) * gp.quicksum(IS_exprs), GRB.MINIMIZE)
 
-                # Front-load all trades: sell everything at the start
-        for k in range(N+1):
-            n[k].Start = X if k == 0 else 0.0
-
-        # Optimistically assume all IS constraints are satisfied (no violation)
-        for p in range(m):
-            b[p].Start = 0
 
         model.optimize()
 
@@ -136,6 +131,7 @@ for trace_file in trace_files:
             obj_vals.append(model.ObjVal)
             solve_times.append(model.Runtime)
             tail_probs.append(b_arr.mean())
+            print("Model Status =", model.status)
         else:
             trades = [[np.nan]*(N+1)]
             errors[f"run_{run}"] = model.status
