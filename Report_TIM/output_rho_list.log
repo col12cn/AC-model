@@ -1,0 +1,16 @@
+Gurobi version: (12, 0, 1)
+BigM = 10000.0, particle = 1500
+Processing delta: 0.1
+Run Number: 0
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2643397
+Academic license 2643397 - for non-commercial use only - registered to co___@trinity.ox.ac.uk
+{'status': 9, 'objval': 891.8422006109117, 'MIPGAP': 0.03312660223353239}
+Run Number: 1
+{'status': 9, 'objval': 912.2398007712495, 'MIPGAP': 0.05324515665274227}
+Run Number: 2
+{'status': 9, 'objval': 921.8990239058868, 'MIPGAP': 0.05986616664681837}
+Run Number: 3
+{'status': 9, 'objval': 915.7786985963061, 'MIPGAP': 0.05189957224709817}
+Run Number: 4

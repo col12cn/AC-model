@@ -26,7 +26,7 @@ M = 1e6            # Big-M constant
 C_max = 2563       # Threshold for implementation shortfall
 
 delta_list = [0.025, 0.05, 0.075, 0.1, 1]
-num_runs = 30      # Monte Carlo replications per δ
+num_runs = 15      # Monte Carlo replications per δ
 
 # To store results
 delta_results = {}
@@ -54,7 +54,7 @@ for delta in delta_list:
         model.Params.OutputFlag   = 0
         model.Params.MIPFocus     = 2   # 1 focus on finding feasible solution, 2 focus on proving optimality
         model.Params.Presolve     = 2
-        model.Params.Threads     = 30
+        model.Params.Threads     = 12
         # Python API
         model.Params.MIPGap = 1e-3
         
