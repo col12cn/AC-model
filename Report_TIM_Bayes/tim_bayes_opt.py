@@ -18,14 +18,14 @@ import datetime
 # List of NetCDF trace files
 # -------------------------
 trace_files = ["/nfs/home/colinn/Report_AC/Report_TIM_Bayes/20250514_000825/trace_50_gap_1_seed_3.nc",
-               "/nfs/home/colinn/Report_AC/Report_TIM_Bayes/20250514_000825/trace_250_gap_1_seed_3.nc"
+               "/nfs/home/colinn/Report_AC/Report_TIM_Bayes/20250514_000825/trace_250_gap_1_seed_3.nc",
                "/nfs/home/colinn/Report_AC/Report_TIM_Bayes/20250514_000825/trace_2000_gap_1_seed_3.nc"]
 
 # -------------------------
 # Parameter Setup
 # -------------------------
 N = 10               # Number of time intervals
-m = 1000             # Number of scenarios
+m = 1500             # Number of scenarios
 X = 1e3              # Total shares to sell
 T = 1                # Trading horizon
 tau = T / N         # Interval length
@@ -84,12 +84,13 @@ for trace_file in trace_files:
         model.Params.Presolve = 2
         model.Params.MIPFocus = 2
         model.Params.OBBT = 2
-        model.Params.Threads = 74
+        model.Params.Threads = 90
         model.Params.MIPGap = 0.002
         model.Params.TimeLimit = 7200
         # Decision variables
         n = model.addVars(N+1, lb=0, name="n")
         b = model.addVars(m, vtype=GRB.BINARY, name="b")
+        
         model.addConstr(gp.quicksum(n[k] for k in range(N+1)) == X, "TotalShares")
 
         # Build IS expressions

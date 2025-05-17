@@ -78,7 +78,7 @@ for i in range(3):
         model.Params.OBBT = 2
         model.Params.Threads = 43
         model.Params.MIPGap = 0.002
-        model.Params.TimeLimit = 7200
+        model.Params.TimeLimit = 4800
         # Decision variables
         n = model.addVars(N+1, lb=0, name="n")
         b = model.addVars(m, vtype=GRB.BINARY, name="b")
@@ -145,7 +145,7 @@ for i in range(3):
         kappa_list.append(kappa_samples)
         gamma_list.append(gamma_samples)
     # Store results per trace
-    all_results[os.path.basename(i)] = {
+    all_results[f"alpha = {i}"] = {
         "inventory": inventory_plots,
         "trades": trade_plots,
         "obj": obj_vals,

@@ -78,7 +78,7 @@ for i in range(3):
         model.Params.OBBT = 2
         model.Params.Threads = 43
         model.Params.MIPGap = 0.002
-        model.Params.TimeLimit = 7200
+        model.Params.TimeLimit = 4800
         # Decision variables
         n = model.addVars(N+1, lb=0, name="n")
         b = model.addVars(m, vtype=GRB.BINARY, name="b")

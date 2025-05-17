@@ -14,3 +14,62 @@ Run Number: 2
 Run Number: 3
 {'status': 9, 'objval': 915.7786985963061, 'MIPGAP': 0.05189957224709817}
 Run Number: 4
+{'status': 9, 'objval': 912.6771209857036, 'MIPGAP': 0.05123774360176963}
+Run Number: 5
+{'status': 9, 'objval': 893.5915673356818, 'MIPGAP': 0.04204055835887461}
+Run Number: 6
+{'status': 9, 'objval': 907.3303254078673, 'MIPGAP': 0.04880124864066216}
+Run Number: 7
+{'status': 9, 'objval': 922.1230611037406, 'MIPGAP': 0.06283715562770104}
+Run Number: 8
+{'status': 9, 'objval': 915.0546800576351, 'MIPGAP': 0.054443210096906114}
+Run Number: 9
+{'status': 9, 'objval': 893.3310931017957, 'MIPGAP': 0.03584134754273208}
+Lap time: 72128.382029 seconds for rho: 1
+Processing delta: 0.1
+Run Number: 0
+{'status': 2, 'objval': 753.9394598274876, 'MIPGAP': 0.001986493355594901}
+Run Number: 1
+{'status': 2, 'objval': 758.183869501212, 'MIPGAP': 0.001932673241651624}
+Run Number: 2
+{'status': 2, 'objval': 746.6724747131229, 'MIPGAP': 0.0019931315384395815}
+Run Number: 3
+{'status': 2, 'objval': 762.6482012049062, 'MIPGAP': 0.0013888884740261744}
+Run Number: 4
+{'status': 2, 'objval': 747.6868074545496, 'MIPGAP': 0.0019485328945771068}
+Run Number: 5
+{'status': 2, 'objval': 771.6932882500628, 'MIPGAP': 0.0019358284303726894}
+Run Number: 6
+{'status': 2, 'objval': 766.4854085341084, 'MIPGAP': 0.0015173675109746794}
+Run Number: 7
+{'status': 9, 'objval': 767.8549933163517, 'MIPGAP': 0.005634266294342097}
+Run Number: 8
+{'status': 2, 'objval': 755.0246450335709, 'MIPGAP': 0.0018122183094497442}
+Run Number: 9
+{'status': 2, 'objval': 750.0571309371105, 'MIPGAP': 0.0018850903001194205}
+Lap time: 8585.964720 seconds for rho: 2
+Processing delta: 0.1
+Run Number: 0
+{'status': 2, 'objval': 703.263800065734, 'MIPGAP': 0.0018479865189430973}
+Run Number: 1
+{'status': 2, 'objval': 696.677383742964, 'MIPGAP': 0.0}
+Run Number: 2
+{'status': 2, 'objval': 704.2201165253082, 'MIPGAP': 0.0010152824035630336}
+Run Number: 3
+{'status': 2, 'objval': 705.4353046878853, 'MIPGAP': 0.0006631434558929218}
+Run Number: 4
+{'status': 2, 'objval': 698.4407129876643, 'MIPGAP': 0.0}
+Run Number: 5
+{'status': 2, 'objval': 694.3380092153376, 'MIPGAP': 0.0}
+Run Number: 6
+{'status': 2, 'objval': 705.4548278471567, 'MIPGAP': 0.0018703158860527641}
+Run Number: 7
+{'status': 2, 'objval': 703.8909845897838, 'MIPGAP': 0.0011572438810878026}
+Run Number: 8
+{'status': 2, 'objval': 687.9790707673623, 'MIPGAP': 0.0}
+Run Number: 9
+{'status': 2, 'objval': 697.011366403643, 'MIPGAP': 0.0004949974485982041}
+Lap time: 34.119301 seconds for rho: 3
+Results saved in: TIM_rho_results_delta_20250516_133808
+{}
+Elapsed time: 80748.477676 seconds
