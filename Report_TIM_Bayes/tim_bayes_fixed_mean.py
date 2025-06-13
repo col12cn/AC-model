@@ -40,8 +40,8 @@ all_results = {}
 # -------------------------
 # Loop over each trace file
 # -------------------------
-theta_sigma_list = [8e-06, 2e-06, 0]
-alpha_a_list = [5, 8, 1e6]
+theta_sigma_list = [8e-06, 2e-06]
+alpha_a_list = [5, 8]
 
 for i in range(3):
     theta_sigma = theta_sigma_list[i]
@@ -77,14 +77,14 @@ for i in range(3):
         model = gp.Model("TIM_MCMC_Opt")
         model.Params.OutputFlag = 0
         model.Params.NonConvex = 2
-        model.Params.Cuts = 2
+        model.Params.Cuts = 3
         model.Params.Presolve = 2
-        model.Params.MIPFocus = 2
+        model.Params.MIPFocus = 0
         model.Params.OBBT = 2
         model.Params.Threads = 86
         model.Params.MIPGap = 0.002
-        if i ==0:
-            model.Params.TimeLimit = 6000
+        if i !=2:
+            model.Params.TimeLimit = 7200
         else:
             model.Params.TimeLimit = 4800
         # Decision variables

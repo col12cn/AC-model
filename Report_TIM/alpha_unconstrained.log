@@ -1,0 +1,75 @@
+Gurobi version: (12, 0, 1)
+BigM = 10000.0, particle = 1500
+Processing delta: 0
+Run Number: 0
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2643397
+Academic license 2643397 - for non-commercial use only - registered to co___@trinity.ox.ac.uk
+{'status': 2, 'objval': 789.4929930733992, 'MIPGAP': 0.0}
+Run Number: 1
+{'status': 2, 'objval': 723.9654131714615, 'MIPGAP': 0.0}
+Run Number: 2
+{'status': 2, 'objval': 696.922561971851, 'MIPGAP': 0.0}
+Run Number: 3
+{'status': 2, 'objval': 686.0313647303856, 'MIPGAP': 0.0}
+Run Number: 4
+{'status': 2, 'objval': 681.6647461992943, 'MIPGAP': 0.0}
+Run Number: 5
+{'status': 2, 'objval': 679.9165646598108, 'MIPGAP': 0.0}
+Run Number: 6
+{'status': 2, 'objval': 679.2170531818523, 'MIPGAP': 1.1279678298829803e-08}
+Run Number: 7
+{'status': 2, 'objval': 678.937231025933, 'MIPGAP': 2.1268030556280344e-07}
+Run Number: 8
+{'status': 2, 'objval': 678.8252652350916, 'MIPGAP': 0.0}
+Run Number: 9
+{'status': 2, 'objval': 678.7804869187103, 'MIPGAP': 0.0}
+Lap time: 8.407555 seconds for alpha: 0.4
+Processing delta: 0
+Run Number: 0
+{'status': 2, 'objval': 635.4907784816872, 'MIPGAP': 1.803534977750224e-07}
+Run Number: 1
+{'status': 2, 'objval': 687.1690975036187, 'MIPGAP': 5.533962282086595e-08}
+Run Number: 2
+{'status': 2, 'objval': 712.394497731911, 'MIPGAP': 0.0}
+Run Number: 3
+{'status': 2, 'objval': 724.756907848563, 'MIPGAP': 1.138036000344508e-07}
+Run Number: 4
+{'status': 2, 'objval': 730.8496600947263, 'MIPGAP': 0.0}
+Run Number: 5
+{'status': 2, 'objval': 733.8685501025767, 'MIPGAP': 3.5491983307154436e-11}
+Run Number: 6
+{'status': 2, 'objval': 735.3702024395686, 'MIPGAP': 0.0}
+Run Number: 7
+{'status': 2, 'objval': 736.1189433331374, 'MIPGAP': 0.0}
+Run Number: 8
+{'status': 2, 'objval': 736.4927734963978, 'MIPGAP': 0.0}
+Run Number: 9
+{'status': 2, 'objval': 736.6795516908992, 'MIPGAP': 2.359129863429293e-09}
+Lap time: 8.201005 seconds for alpha: 0.5
+Processing delta: 0
+Run Number: 0
+{'status': 2, 'objval': 684.1547189287667, 'MIPGAP': 0.0}
+Run Number: 1
+{'status': 2, 'objval': 730.602075128031, 'MIPGAP': 0.0009536816743248376}
+Run Number: 2
+{'status': 2, 'objval': 753.769083516358, 'MIPGAP': 0.0}
+Run Number: 3
+{'status': 2, 'objval': 765.9940241776969, 'MIPGAP': 4.725602572404676e-05}
+Run Number: 4
+{'status': 2, 'objval': 773.1486503311103, 'MIPGAP': 0.0003479111768740393}
+Run Number: 5
+{'status': 2, 'objval': 777.3890299765742, 'MIPGAP': 2.384456320496906e-05}
+Run Number: 6
+{'status': 2, 'objval': 779.9115085567337, 'MIPGAP': 0.00014182687027302566}
+Run Number: 7
+{'status': 2, 'objval': 781.416539668295, 'MIPGAP': 1.1562788626074008e-06}
+Run Number: 8
+{'status': 2, 'objval': 782.3163667551728, 'MIPGAP': 2.4596896582332462e-05}
+Run Number: 9
+{'status': 2, 'objval': 782.8550804776719, 'MIPGAP': 0.0003080683481295692}
+Lap time: 21.938760 seconds for alpha: 0.6
+Results saved in: TIM_alpha_results_20250520_124337
+{}
+Elapsed time: 38.559354 seconds

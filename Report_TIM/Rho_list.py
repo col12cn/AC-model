@@ -32,13 +32,13 @@ eta =  1e-03*tau         # Temporary impact coefficient
 gamma = 1e-03    # Permanent impact parameter
 #sigma = 0        # Volatility
 kappa = 1e-03
-#rho = 2.231
-sigma= 0.45
-delta = 0.1
-
+rho = 2.231
+sigma= 0
+delta = 1
+alpha = 0.5
 # sigma_list = [0, 1e-04, 1e-03, 1e-02]
-delta_list = [1,2,3]
-
+delta_list = [2.25e-03, 2.1e-03, 2e-3, 1.9e-03, 1.75e-03]
+theta =2e-03
 
 M = 1e4              # Big-M constant
 C_max = 1000     # Threshold for implementation shortfall
@@ -51,8 +51,8 @@ num_runs = 10
 delta_results = {}
 print(f"BigM = {M}, particle = {m}")
 
-for rho in delta_list:
-    print(f"Processing delta: {delta}")
+for theta in delta_list:
+    print(f"Processing delta: {theta}")
     lap_start = time.time()
 
     inventory_plots = []  # To store inventory trajectories for each run
@@ -67,7 +67,8 @@ for rho in delta_list:
         # Generate Brownian noise for each scenario (xi ~ N(0,1))
         xi = np.random.normal(0, 1, (m, N+1))
         # Generate gamma samples (here standard deviation is 0, so each is gamma)
-        gamma_samples = np.random.normal(gamma, 0, m)
+        gamma_p = (theta)*(1-alpha)
+        kappa = (theta)*(alpha)
         
         # Create a new Gurobi model for this run
         model = gp.Model("TIMOpt_Speed")
@@ -77,10 +78,10 @@ for rho in delta_list:
         model.Params.Cuts         = 2  
         model.Params.Presolve     = 2
         model.Params.OBBT = 2
-        model.Params.Threads = 86
+        model.Params.Threads = 32
         model.Params.TimeLimit = 7200
         # Python API
-        model.Params.MIPGap = 2e-3
+        model.Params.MIPGap = 1e-3
         
         # Decision variables: trades for each interval and binary variables for scenarios
         n_vars = model.addVars(N+1, lb=0, name="n")
@@ -92,7 +93,6 @@ for rho in delta_list:
         # Build implementation shortfall (IS) expressions for each scenario
         IS_expr = []
         for p in range(m):
-            gamma_p = gamma_samples[p]
             # Permanent impact: 0.5 * gamma_p * X^2 - 0.5 * gamma_p * sum(n_k^2)
             perm_term = 0.5 * gamma_p * (X**2) - 0.5 * gamma_p * gp.quicksum(n_vars[k]*n_vars[k] for k in range(N+1))
             
@@ -132,6 +132,7 @@ for rho in delta_list:
         model.optimize()
         
         allowed = (2,9,13)   # keep only these
+
         trade_list = []
         b_list =[]
         if model.status in allowed:                # safe: variable values exist
@@ -152,8 +153,8 @@ for rho in delta_list:
             tail_probs.append(b_arr.mean())
 
         else:
-            print(f"Run rho={rho}, #{run}: discarded (status={model.status}).")
-            error_list[f"rho_{rho}_run_{run}"] = model.status
+            print(f"Run theta={theta}, #{run}: discarded (status={model.status}).")
+            error_list[f"theta_{theta}_run_{run}"] = model.status
             obj_vals.append(np.nan)
             solve_times.append(np.nan)
             tail_probs.append(np.nan)
@@ -172,10 +173,10 @@ for rho in delta_list:
 
     lap_end = time.time()
     lap_time = lap_end - lap_start
-    print(f"Lap time: {lap_time:.6f} seconds for rho: {rho}")
+    print(f"Lap time: {lap_time:.6f} seconds for theta: {theta}")
 
     # store everything
-    delta_results[rho] = {
+    delta_results[theta] = {
         "inventory_runs": inventory_plots,
         "trade_runs":     trade_plots,
         "obj_vals":       obj_vals,
@@ -186,7 +187,7 @@ for rho in delta_list:
 
 # --- Create an output directory with the current time stamp ---
 current_time = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-results_dir = f"TIM_rho_results_delta_{current_time}"
+results_dir = f"TIM_theta_results_{current_time}"
 os.makedirs(results_dir, exist_ok=True)
 
 pickle_file = os.path.join(results_dir, "aggregated_results.pkl")

@@ -35,7 +35,7 @@ def random_liquidation_strategy(state, N, seed = None):
         return remaining_shares
     else:
         np.random.seed(seed) 
-        trade = np.random.uniform(0, remaining_shares)
+        trade = np.random.uniform(1e3, remaining_shares)
         return trade
 
 #---------------

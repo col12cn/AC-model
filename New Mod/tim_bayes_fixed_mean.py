@@ -1,3 +1,4 @@
+# %% Imports
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,14 +14,7 @@ from gurobipy import GRB
 import pickle
 import time
 import datetime
-
-# -------------------------
-# List of NetCDF trace files
-# -------------------------
-
-# -------------------------
-# Parameter Setup
-# -------------------------
+# %% Predefined Params
 N = 10               # Number of time intervals
 m = 1500             # Number of scenarios
 X = 1e3              # Total shares to sell
@@ -35,15 +29,14 @@ M = 5e3              # Big-M constant
 C_max = 1001         # IS threshold
 num_runs = 10        # Number of Monte Carlo runs per trace file
 
+# %% List of variance values
 all_results = {}
-
-# -------------------------
-# Loop over each trace file
-# -------------------------
-alpha_mean_list = [0.4, 0.5, 0.6]
-
+theta_sigma_list = [8e-06, 2e-06]
+alpha_a_list = [5, 8]
+# %% Iterating over the list
 for i in range(3):
-    alpha = alpha_mean_list[i]
+    theta_sigma = theta_sigma_list[i]
+    alpha_a = alpha_a_list[i]
     # Prepare containers
     inventory_plots = []
     trade_plots = []
@@ -54,13 +47,16 @@ for i in range(3):
     kappa_list = []
     gamma_list = []
 
-    # Monte Carlo sampling using joint posterior draws
+    # %% Innner loop that runs the optimisation multiple times
     for run in range(num_runs):
         print(f" Run Number: {run}")
         xi = np.random.normal(0, 1, (m, N+1))
-        # Sample joint indices into posterior draws
-        theta_samples = np.array([2e-5]*m)
-        alpha_samples = np.array([alpha] * m)
+        # %% Sampling from know distribution with fixed mean
+        theta_samples = np.random.normal(2e-5, theta_sigma, m)
+        if i != 2:
+            alpha_samples = np.random.beta(alpha_a, alpha_a, m)
+        else:
+            alpha_samples = np.array([0.5] * m)
 
         # Transformations to get model parameters
         kappa_samples = theta_samples * alpha_samples * 100     # scale as before
@@ -68,27 +64,31 @@ for i in range(3):
 
         print(f"Mean of Kappa: {np.mean(kappa_samples)}", f"STD : {np.std(kappa_samples)}")
         print(f"Mean of Gamma: {np.mean(gamma_samples)}", f"STD : {np.std(gamma_samples)}")
-
+        # %% Model Tuning
         model = gp.Model("TIM_MCMC_Opt")
         model.Params.OutputFlag = 0
         model.Params.NonConvex = 2
-        model.Params.Cuts = 2
+        model.Params.Cuts = 3
         model.Params.Presolve = 2
-        model.Params.MIPFocus = 2
+        model.Params.MIPFocus = 0
         model.Params.OBBT = 2
-        model.Params.Threads = 45
+        model.Params.Threads = 86
         model.Params.MIPGap = 0.002
-        model.Params.TimeLimit = 6000
-        # Decision variables
+        if i !=2:
+            model.Params.TimeLimit = 7200
+        else:
+            model.Params.TimeLimit = 4800
+        # %% Adding decision variables
         n = model.addVars(N+1, lb=0, name="n")
         b = model.addVars(m, vtype=GRB.BINARY, name="b")
         model.addConstr(gp.quicksum(n[k] for k in range(N+1)) == X, "TotalShares")
 
-        # Build IS expressions
+        #%% Build IS expressions
         IS_exprs = []
         for p in range(m):
             κ = kappa_samples[p]
             γ = gamma_samples[p]
+            # ρ = rho_samples[p]
             ρ = 2.231
             perm = 0.5 * γ * X**2 - 0.5 * γ * gp.quicksum(n[k]*n[k] for k in range(N+1))
 
@@ -111,13 +111,11 @@ for i in range(3):
             IS_p = perm + spread + temp - sto + decay
             IS_exprs.append(IS_p)
             model.addQConstr(IS_p <= C_max + M * b[p], name=f"IS_{p}")
-
+        #%% Build Chance Constraint and Objective Function
         model.addConstr(gp.quicksum(b[p] for p in range(m)) <= delta * m, "Chance")
         model.setObjective((1.0/m) * gp.quicksum(IS_exprs), GRB.MINIMIZE)
-
-
         model.optimize()
-
+        #%% Checking for optimal status in optimisation problem and storing inner loop results
         if model.status in (2, 9, 13):
             trades = [n[k].X for k in range(N+1)]
             b_arr = np.array([b[p].X for p in range(m)])
@@ -144,8 +142,8 @@ for i in range(3):
 
         kappa_list.append(kappa_samples)
         gamma_list.append(gamma_samples)
-    # Store results per trace
-    all_results[f"alpha = {i}"] = {
+    # %% Store results per variance value
+    all_results[i] = {
         "inventory": inventory_plots,
         "trades": trade_plots,
         "obj": obj_vals,
@@ -156,9 +154,9 @@ for i in range(3):
         "gamma_samp": gamma_list,
     }
 
-# Save aggregated outputs
+#%% Save aggregated outputs
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-outdir = f"TIM_opt_vary_alpha_results_{timestamp}"
+outdir = f"TIM_opt_fixed_mean_results_{timestamp}"
 os.makedirs(outdir, exist_ok=True)
 with open(os.path.join(outdir, "all_results.pkl"), "wb") as f:
     pickle.dump(all_results, f)

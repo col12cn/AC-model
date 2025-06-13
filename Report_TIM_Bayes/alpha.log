@@ -1,0 +1,156 @@
+Gurobi version: (12, 0, 1)
+ Run Number: 0
+Mean of Kappa: 0.0008000000000000001 STD : 0.0
+Mean of Gamma: 0.0012 STD : 2.168404344971009e-19
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2643397
+Academic license 2643397 - for non-commercial use only - registered to co___@trinity.ox.ac.uk
+Model Status = 9
+Gap = 0.008438541888554875
+ Run Number: 1
+Mean of Kappa: 0.0008000000000000001 STD : 0.0
+Mean of Gamma: 0.0012 STD : 2.168404344971009e-19
+Model Status = 9
+Gap = 0.009238085088171257
+ Run Number: 2
+Mean of Kappa: 0.0008000000000000001 STD : 0.0
+Mean of Gamma: 0.0012 STD : 2.168404344971009e-19
+Model Status = 9
+Gap = 0.00928978962451655
+ Run Number: 3
+Mean of Kappa: 0.0008000000000000001 STD : 0.0
+Mean of Gamma: 0.0012 STD : 2.168404344971009e-19
+Model Status = 9
+Gap = 0.00211079594447314
+ Run Number: 4
+Mean of Kappa: 0.0008000000000000001 STD : 0.0
+Mean of Gamma: 0.0012 STD : 2.168404344971009e-19
+Model Status = 9
+Gap = 0.007001663110853448
+ Run Number: 5
+Mean of Kappa: 0.0008000000000000001 STD : 0.0
+Mean of Gamma: 0.0012 STD : 2.168404344971009e-19
+Model Status = 9
+Gap = 0.00970504350084264
+ Run Number: 6
+Mean of Kappa: 0.0008000000000000001 STD : 0.0
+Mean of Gamma: 0.0012 STD : 2.168404344971009e-19
+Model Status = 9
+Gap = 0.003556574146990255
+ Run Number: 7
+Mean of Kappa: 0.0008000000000000001 STD : 0.0
+Mean of Gamma: 0.0012 STD : 2.168404344971009e-19
+Model Status = 2
+Gap = 0.0019732957898346355
+ Run Number: 8
+Mean of Kappa: 0.0008000000000000001 STD : 0.0
+Mean of Gamma: 0.0012 STD : 2.168404344971009e-19
+Model Status = 9
+Gap = 0.0031260989361608085
+ Run Number: 9
+Mean of Kappa: 0.0008000000000000001 STD : 0.0
+Mean of Gamma: 0.0012 STD : 2.168404344971009e-19
+Model Status = 9
+Gap = 0.008092518661259913
+ Run Number: 0
+Mean of Kappa: 0.0010000000000000002 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0010000000000000002 STD : 2.168404344971009e-19
+Model Status = 2
+Gap = 0.0019597326104857293
+ Run Number: 1
+Mean of Kappa: 0.0010000000000000002 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0010000000000000002 STD : 2.168404344971009e-19
+Model Status = 2
+Gap = 0.0018531207947905433
+ Run Number: 2
+Mean of Kappa: 0.0010000000000000002 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0010000000000000002 STD : 2.168404344971009e-19
+Model Status = 2
+Gap = 0.001733648867017686
+ Run Number: 3
+Mean of Kappa: 0.0010000000000000002 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0010000000000000002 STD : 2.168404344971009e-19
+Model Status = 2
+Gap = 0.0018739174541855294
+ Run Number: 4
+Mean of Kappa: 0.0010000000000000002 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0010000000000000002 STD : 2.168404344971009e-19
+Model Status = 2
+Gap = 0.001709976284596683
+ Run Number: 5
+Mean of Kappa: 0.0010000000000000002 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0010000000000000002 STD : 2.168404344971009e-19
+Model Status = 2
+Gap = 0.0001479232951402573
+ Run Number: 6
+Mean of Kappa: 0.0010000000000000002 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0010000000000000002 STD : 2.168404344971009e-19
+Model Status = 2
+Gap = 0.0018923185179134463
+ Run Number: 7
+Mean of Kappa: 0.0010000000000000002 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0010000000000000002 STD : 2.168404344971009e-19
+Model Status = 2
+Gap = 0.00189373985498259
+ Run Number: 8
+Mean of Kappa: 0.0010000000000000002 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0010000000000000002 STD : 2.168404344971009e-19
+Model Status = 2
+Gap = 0.0018937437142022152
+ Run Number: 9
+Mean of Kappa: 0.0010000000000000002 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0010000000000000002 STD : 2.168404344971009e-19
+Model Status = 2
+Gap = 0.0019442189527866254
+ Run Number: 0
+Mean of Kappa: 0.0012 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0008000000000000001 STD : 0.0
+Model Status = 2
+Gap = 0.0
+ Run Number: 1
+Mean of Kappa: 0.0012 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0008000000000000001 STD : 0.0
+Model Status = 2
+Gap = 0.0
+ Run Number: 2
+Mean of Kappa: 0.0012 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0008000000000000001 STD : 0.0
+Model Status = 2
+Gap = 0.0
+ Run Number: 3
+Mean of Kappa: 0.0012 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0008000000000000001 STD : 0.0
+Model Status = 2
+Gap = 0.0
+ Run Number: 4
+Mean of Kappa: 0.0012 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0008000000000000001 STD : 0.0
+Model Status = 2
+Gap = 0.0
+ Run Number: 5
+Mean of Kappa: 0.0012 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0008000000000000001 STD : 0.0
+Model Status = 2
+Gap = 0.0
+ Run Number: 6
+Mean of Kappa: 0.0012 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0008000000000000001 STD : 0.0
+Model Status = 2
+Gap = 0.0
+ Run Number: 7
+Mean of Kappa: 0.0012 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0008000000000000001 STD : 0.0
+Model Status = 2
+Gap = 0.0
+ Run Number: 8
+Mean of Kappa: 0.0012 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0008000000000000001 STD : 0.0
+Model Status = 2
+Gap = 0.0
+ Run Number: 9
+Mean of Kappa: 0.0012 STD : 2.168404344971009e-19
+Mean of Gamma: 0.0008000000000000001 STD : 0.0
+Model Status = 2
+Gap = 0.0
+Optimization results saved to: TIM_opt_vary_alpha_results_20250519_041816

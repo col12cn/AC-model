@@ -76,9 +76,12 @@ for i in range(3):
         model.Params.Presolve = 2
         model.Params.MIPFocus = 2
         model.Params.OBBT = 2
-        model.Params.Threads = 43
+        model.Params.Threads = 45
         model.Params.MIPGap = 0.002
-        model.Params.TimeLimit = 4800
+        if i ==0:
+            model.Params.TimeLimit = 6000
+        else:
+            model.Params.TimeLimit = 4800
         # Decision variables
         n = model.addVars(N+1, lb=0, name="n")
         b = model.addVars(m, vtype=GRB.BINARY, name="b")
@@ -145,7 +148,7 @@ for i in range(3):
         kappa_list.append(kappa_samples)
         gamma_list.append(gamma_samples)
     # Store results per trace
-    all_results[os.path.basename(i)] = {
+    all_results[i] = {
         "inventory": inventory_plots,
         "trades": trade_plots,
         "obj": obj_vals,
